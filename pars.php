@@ -139,7 +139,7 @@ class Pars
     $conf = fopen('config.json', 'r+');
     $confJson = [
       'start' => $this->lastUrl,
-      'end' => $this->lastUrl + 2001,
+      'end' => $this->lastUrl + 1001,
     ];
     fwrite($conf, json_encode($confJson));
     fclose($conf);

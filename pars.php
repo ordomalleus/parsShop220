@@ -11,6 +11,8 @@ class Pars
   public $count = 0; //сколько всего спарсили товаров за запуск скрипта
   public $lastUrl = 0;  //ID url последнего запроса
 
+  public $test;  //для тестов
+
   function __construct( $begin = 0, $end = null )
   {
     $this->begin = $begin;
@@ -72,17 +74,24 @@ class Pars
       //получаем имя товара
       $name = $document->find('td>div>h1')->text();
 
+      //Получаем рубрику родителя
+      $parentRub = $document->find('#breadcrumbs>a');
+      $breadcrumbs = [];
+      foreach ( $parentRub as $el){
+        $el = pq($el);
+        $breadcrumbs[] = $el->text();
+      }
+      $breadcrumbsResult = implode(" >> ", $breadcrumbs);
+
       //получаем массивы данных
       $content = $document->find('span>meta');
       foreach ( $content as $el ){
         $el = pq($el);
         //получаем цену
-        //$price = 'цена не найдена';
         if ( $el->attr('itemprop') == 'Price'){
           $price = $el->attr('content');
         }
         //получаем валюту
-        //$val = 'тип валюты не найден';
         if ( $el->attr('itemprop') == 'priceCurrency'){
           $val = $el->attr('content');
         }
@@ -94,13 +103,16 @@ class Pars
       //сохраняем сылку
       $urlArr = $url;
 
+      //Добовляем в массив данных
       $this->arr[] = [
         'Наименование товара' => $name,
         'Цена минимальная' => $price,
         'Валюта' => $val,
         'Ссылка на страницу товара' => $urlArr,
+        'Наименование род. Рубрики' => $breadcrumbsResult
       ];
 
+      //Увеличим счетчик спарсеных товаров
       $this->count += 1;
     }
 
@@ -114,7 +126,7 @@ class Pars
   //Запись в файлы
   public function getFiles ($arr)
   {
-    $fp = fopen('parser.txt', 'a');
+    $fp = fopen('parserTest.txt', 'a');
 
     foreach($arr as $ar){
       $str = "";

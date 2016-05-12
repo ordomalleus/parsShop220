@@ -11,8 +11,11 @@ if ( Pars::testParser() ){
 
   //Вызываем парсинг с нужными параметрами конфига
   $parser = new Pars($config->start,$config->end);
+  //Запускаем парсинг
   $parser->goParser();
+  //Получаем результат парсинга
   $result = $parser->getArr();
+  //Пишем в файл
   $parser->getFiles($result);
   echo 'Закончился парсинг сайта';
 } else {

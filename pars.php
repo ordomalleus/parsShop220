@@ -126,7 +126,7 @@ class Pars
   //Запись в файлы
   public function getFiles ($arr)
   {
-    $fp = fopen('parserTest.txt', 'a');
+    $fp = fopen('parser.txt', 'a');
 
     foreach($arr as $ar){
       $str = "";

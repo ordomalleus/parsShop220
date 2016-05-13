@@ -15,11 +15,8 @@ if ( Pars::testParser() ){
 
   //возьмем настройки из json
   $config = Pars::getJson();
-//  print_r($config->end);
-//  die();
 
   //Вызываем парсинг с нужными параметрами конфига
-//  $parser = new Pars(65,82);
   $parser = new Pars($config->start,$config->end);
   $parser->goParser();
   $result = $parser->getArr();

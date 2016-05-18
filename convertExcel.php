@@ -11,16 +11,22 @@ $fp = file('parser.txt');
 
 $cel = 1; //номер строки
 foreach ($fp as $val){
-  $str = explode(";", $val);
-  $str[0] = isset($str[0]) ? substr($str[0],1,-1) : ' ';
+//  $str = explode(";", $val);  //рабочий вариант до 16.05.2016
+  $str = explode("##", $val);
+//  $str[0] = isset($str[0]) ? substr($str[0],1,-1) : ' ';
+  $str[0] = isset($str[0]) ? $str[0] : ' ';
   $page->setCellValue("A" . $cel, $str[0]);
-  $str[1] = isset($str[1]) ? substr($str[1],1,-1) : ' ';
+//  $str[1] = isset($str[1]) ? substr($str[1],1,-1) : ' ';
+  $str[1] = isset($str[1]) ? $str[1] : ' ';
   $page->setCellValue("B" . $cel, $str[1]);
-  $str[2] = isset($str[2]) ? substr($str[2],1,-1) : ' ';
+//  $str[2] = isset($str[2]) ? substr($str[2],1,-1) : ' ';
+  $str[2] = isset($str[2]) ? $str[2] : ' ';
   $page->setCellValue("C" . $cel, $str[2]);
-  $str[3] = isset($str[3]) ? substr($str[3],1,-1) : ' ';
+//  $str[3] = isset($str[3]) ? substr($str[3],1,-1) : ' ';
+  $str[3] = isset($str[3]) ? $str[3] : ' ';
   $page->setCellValue("D" . $cel, $str[3]);
-  $str[4] = isset($str[4]) ? substr($str[4],1,-1) : ' ';
+//  $str[4] = isset($str[4]) ? substr($str[4],1,-1) : ' ';
+  $str[4] = isset($str[4]) ? $str[4] : ' ';
   $page->setCellValue("E" . $cel, $str[4]);
   $cel++;
 }

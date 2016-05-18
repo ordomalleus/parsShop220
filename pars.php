@@ -132,7 +132,8 @@ class Pars
       $str = "";
       foreach ($ar as $key => $value){
 //        $str .= $key . "\t" . "\"" . $value . "\";" . "\t";
-        $str .= "\"" . $value . "\";";
+//        $str .= "\"" . $value . "\";"; рабочий вариант до 16.05.2016
+        $str .= $value . "##";
       }
       $str .= "\r\n";
       fwrite($fp, $str);
